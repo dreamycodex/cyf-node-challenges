@@ -2,27 +2,46 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const allHarrow = require("../data/Harrow.json");
+const harrow = require("../data/Harrow.json");
+const heathrow = require("../data/Heathrow.json");
+const stratford = require("../data/Stratford.json");
+
+const cities = { harrow, heathrow, stratford };
 
 app.get("/", (req, res) => {
-  res.send(allHarrow);
+  res.send(cities);
 });
 
-app.get("/pharmacies", (req, res) => {
-  res.send(allHarrow.pharmacies);
+app.get("/:city", (req, res) => {
+    const urlCity = req.params.city;
+    const city = cities[urlCity];
+    res.send(city);
 });
 
-app.get("/colleges", (req, res) => {
-    res.send(allHarrow.colleges);
-})
+app.get("/:city/pharmacies", (req, res) => {
+  const urlCity = req.params.city;
+  const pharmacies = cities[urlCity].pharmacies;
+  res.send(pharmacies);
+});
 
-app.get("/doctors", (req, res) => {
-    res.send(allHarrow.doctors);
-})
+app.get("/:city/colleges", (req, res) => {
+  const urlCity = req.params.city;
+  const colleges = cities[urlCity].colleges;
+  res.send(colleges);
+});
 
-app.get("/hospitals", (req, res) => {
-    res.send(allHarrow.hospitals);
-})
+app.get("/:city/doctors", (req, res) => {
+  const urlCity = req.params.city;
+  const doctors = cities[urlCity].doctors;
+  res.send(doctors);
+});
+
+app.get("/:city/hospitals", (req, res) => {
+  const urlCity = req.params.city;
+  const hospitals = cities[urlCity].hospitals;
+  res.send(hospitals);
+});
+
 const listener = app.listen(8080, () => {
   console.log("Your app is listening on port 8080" + listener.address().port);
 });
