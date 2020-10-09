@@ -1,0 +1,31 @@
+.App__header {
+  display: grid;
+  place-items: center;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 15px;
+}
+
+.categories > button {
+  background-color: grey;
+  border: none;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.table {
+  margin: 30px 20px;
+  border-collapse: collapse;
+}
+
+.table, th, td {
+  border: 1px solid black;
+  padding: 10px;
+
+}
